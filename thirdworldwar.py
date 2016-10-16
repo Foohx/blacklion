@@ -84,8 +84,15 @@ class ThirdWorldWar:
                 })
         return buildings
 
-    def getTroop():
-        
+    def getTroopsAvailable(self):
+        r = self.s.get('http://www.3gm.fr/game/mission.php')
+        t = html.fromstring(r.content)
+        trpName = t.xpath('//div[@class="rapport_th"]/text()')
+        trpNumber = t.xpath('//div[@class="rapport_td"]/text()')
+        for i in range(0,3): trpName.pop(0)
+        for name, qty in zip(trpName, trpNumber):
+            qty = re.sub('[.]', '', qty)
+            print(name, int(qty))
 
     def isLogged(self):
         r = self.s.get('http://www.3gm.fr/game/index.php')
