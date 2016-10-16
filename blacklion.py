@@ -7,5 +7,6 @@ if __name__ != "__main__":
 
 h = ThirdWorldWar('aezo', '26041994', 3)
 l = h.rLogin()
-
+print(l)
+l = h.rLogout()
 print(l)

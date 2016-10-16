@@ -18,6 +18,10 @@ class ThirdWorldWar:
         r = self.s.get('http://www.3gm.fr/game/index.php')
         return self.isLogged()
 
+    def rLogout(self):
+        r = self.s.get('http://www.3gm.fr/index.php?action=deco')
+        return True if not self.isLogged() else False
+
     def isLogged(self):
         r = self.s.get('http://www.3gm.fr/game/index.php')
         tree = html.fromstring(r.content)
