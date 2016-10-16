@@ -1,3 +1,10 @@
 {
-
+    "users": [
+        {
+            "nickname": "3gm_username",
+            "password": "3gm_password",
+            "server": 3,
+            "group": 0
+        }
+    ]
 }
