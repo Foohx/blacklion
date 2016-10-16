@@ -1,5 +1,6 @@
 # coding: utf-8
 import requests
+import re
 from lxml import html
 
 class ThirdWorldWar:
@@ -29,3 +30,12 @@ class ThirdWorldWar:
         if len(nav) == 0 or '../index.php?action=deco' not in nav:
             return False
         return True
+
+    def getToken(self, html=False):
+        if not html:
+            r = self.s.get('http://www.3gm.fr/game/index.php')
+            html = r.content
+        m = re.search('&tk=([a-z0-9]+)', html)
+        if m == None:
+            return False, ""
+        return True, m.group(1)
