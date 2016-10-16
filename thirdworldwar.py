@@ -2,6 +2,7 @@
 import requests
 import re
 from lxml import html
+from scrapy.selector import Selector
 
 class ThirdWorldWar:
 
@@ -61,6 +62,30 @@ class ThirdWorldWar:
         })
         # print(r.content)
         return True
+
+    def getBuildings(self):
+        buildings = []
+        pages = ['build.php', 'production.php', 'army.php']
+        for page in pages:
+            r = self.s.get('http://www.3gm.fr/game/'+page)
+            t = html.fromstring(r.content)
+            buildName = t.xpath('//div[@class="build_top_titre"]/text()')
+            buildLevl = t.xpath('//div[@class="build_top_niveau"]/span/text()')
+            buildAble = t.xpath('//div[@class="build_content"]/div/a/@href')
+            for name, lvl in zip(buildName, buildLevl):
+                can_build = False
+                if any(name in links for links in buildAble):
+                    can_build = True
+                buildings.insert(-1, {
+                    'name': name,
+                    'level': lvl,
+                    'available': can_build,
+                    'page': page
+                })
+        return buildings
+
+    def getTroop():
+        
 
     def isLogged(self):
         r = self.s.get('http://www.3gm.fr/game/index.php')
