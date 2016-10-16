@@ -113,6 +113,20 @@ class ThirdWorldWar:
             })
         return troops
 
+    def getDefenses(self):
+        r = self.s.get('http://www.3gm.fr/game/defense.php')
+        t = html.fromstring(r.content)
+        defName = t.xpath('//div[@class="build_top_titre"]/text()')
+        defNumber = t.xpath('//div[@class="build_top_niveau"]/span/text()')
+        defenses = []
+        for name, qty in zip(defName, defNumber):
+            qty = re.sub('[.]', '', qty)
+            defenses.insert(-1, {
+                'name': name,
+                'qty': int(qty)
+            })
+        return defenses
+
     def isLogged(self):
         r = self.s.get('http://www.3gm.fr/game/index.php')
         tree = html.fromstring(r.content)
