@@ -1,3 +1,4 @@
 colorama==0.3.7
+jsondatabase==0.1.1
 lxml==3.6.4
 requests==2.11.1
