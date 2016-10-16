@@ -1,3 +1,4 @@
+('IS LOGGED : ', True)
 <?xml version="1.0" encoding="iso-8859-1" ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr"  style='background:black'>
 <head>
@@ -10,58 +11,58 @@
 	<meta name='REVISIT-AFTER' content='5 days'/>
 	<meta http-equiv='Content-Language' content='fr'/>
 	<META name='Copyright' content=''/>
-	
+
 	<link href='css/style_game.css' rel='stylesheet' type='text/css' media='screen' />
 	<link href='css/style_game_pages.css' rel='stylesheet' type='text/css' media='screen' />
-	
+
 	<link rel='shortcut icon' type='image/x-icon' href='img/favicon.ico'/>
 	<link rel='icon' type='image/png' href='img/favicon.ico'/>
-	
+
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery_format.js"></script>
-	
+
 	<script type='text/javascript'>
 	//GLOBAL
-	alliage = 1963260.0275330541;
-	silicium = 2419754.5737821343;
-	petrole = 26591.493673158286;
-	essence = 583413.8930295943;
-	pieces = 139210.0744814923;
-	monnaie = 6049599.6213197205;
-	
+	alliage = 2083790.0299667895;
+	silicium = 2497415.635468133;
+	petrole = 50713.501481062;
+	essence = 602138.3077901102;
+	pieces = 148331.6787360739;
+	monnaie = 6262440.246649216;
+
 	//empecher refresh bug
 	var refreshAuto = false;
-	
+
 	function getInfos(nom){
 		var inf = document.getElementById('infos_'+nom);
 		var img = document.getElementById('img_'+nom);
 		if(inf && inf.style.display != 'none'){
 			inf.style.display = "none";
-		} 
+		}
 		else{
 			inf.style.display = "inline";
 		}
 		if(img && img.style.display != 'none'){
 			img.style.display = "none";
-		} 
+		}
 		else{
 			img.style.display = "inline";
 		}
 		return false; // Annule l'action du lien
 	}
-	
+
 	function change(id) {
 	  var div = document.getElementById(id);
 	  if(div && div.style.display != 'none'){
 		div.style.display = "none";
-	  } 
+	  }
 	  else{
 		div.style.display = "block";
 	  }
 	  return false; // Annule l'action du lien
 	}
-	
-	
+
+
 	function number2(chaine){
 		var str = chaine.toString();
 		var i = str.length-1;
@@ -93,13 +94,13 @@
 			div.value = "";
 		}
 	}
-	
+
 	function number(chaine, color){
 		if(color == undefined)
 			color = false;
 		else
 			color = true;
-	
+
 		var str = chaine.toString();
 		var i = str.length-1;
 		var result = "";
@@ -118,50 +119,50 @@
 		}
 		return result;
 	}
-	
+
 	function update_res(){
-		
+
 		if(alliage + 18.100315728148 <= 37830000)
 			alliage += 18.100315728148;
 		else if(alliage < 37830000 && alliage + 18.100315728148 > 37830000)
 			alliage = 37830000;
 		document.getElementById("res_alliage").innerHTML = number(parseInt(alliage));
 
-		
+
 		if(silicium + 11.662571209791 <= 37830000)
 			silicium += 11.662571209791;
 		else if(silicium < 37830000 && silicium + 11.662571209791 > 37830000)
 			silicium = 37830000;
 		document.getElementById("res_silicium").innerHTML = number(parseInt(silicium));
-		
+
 		if(petrole + 3.622467008245 <= 37830000)
 			petrole += 3.622467008245;
 		else if(petrole < 37830000 && petrole + 3.622467008245 > 37830000)
 			petrole = 37830000;
 		document.getElementById("res_petrole").innerHTML = number(parseInt(petrole));
-		
-		
+
+
 		if(essence + 2.8118958943559 <= 37830000)
 			essence += 2.8118958943559;
 		else if(essence < 37830000 && essence + 2.8118958943559 > 37830000)
 			essence = 37830000;
 		document.getElementById("res_essence").innerHTML = number(parseInt(essence));
-		
-		
+
+
 		if(pieces + 1.3698159265027 <= 37830000)
 			pieces += 1.3698159265027;
 		else if(pieces < 37830000 && pieces + 1.3698159265027 > 37830000)
 			pieces = 37830000;
 		document.getElementById("res_pieces").innerHTML = number(parseInt(pieces));
-		
+
 		if(monnaie + 31.962851078164 <= 37830000)
 			monnaie += 31.962851078164;
 		else if(monnaie < 37830000 && monnaie + 31.962851078164 <= 37830000)
 			monnaie = 37830000;
 		document.getElementById("res_monnaie").innerHTML = number(parseInt(monnaie));
-		
+
 	}
-	
+
 	function timestamp(temps){
 		var str = temps.toString();
 		var i = str.length-1;
@@ -195,12 +196,12 @@
 			total += parseInt(heure) * 3600;
 		if(jour != "")
 			total += parseInt(jour) * 3600 * 24;
-		
+
 		total--;
 		var result = total;
 		return result;
 	}
-	
+
 	function tempsAffichage(entier){
 		var temps = "";
 		if(entier <= 0){
@@ -211,9 +212,9 @@
 		}
 		else{
 			var ts = entier;
-			
+
 			var jour = Math.floor(ts/86400);
-			
+
 			if(jour>0){
 				ts -= jour * 86400;
 				temps += jour+"j ";
@@ -234,7 +235,7 @@
 		}
 		return temps;
 	}
-	
+
 	function UNIXtoDate(unix_timestamp){
 		// create a new javascript Date object based on the timestamp
 		// multiplied by 1000 so that the argument is in milliseconds, not seconds
@@ -250,7 +251,7 @@
 		var formattedTime = hours + ':' + minutes + ':' + seconds;
 		return formattedTime;
 	}
-	
+
 	function getByClassName(classname)
     {
         var elArray = [];
@@ -268,7 +269,7 @@
         return elArray;
 
     };
-	
+
 	function decompteTemps(){
 		var tab = document.getElementsByClassName("constructionActuelle");
 		var temps = "";
@@ -276,22 +277,22 @@
 		{
 			if(tab[i] === undefined)
 				continue;
-			
-			if(tab[i].innerHTML != "Terminé !"){
+
+			if(tab[i].innerHTML != "Terminï¿½ !"){
 				temps = timestamp(tab[i].innerHTML);
 				temps = tempsAffichage(parseInt(temps));
 				tab[i].innerHTML = temps;
 			}
 		}
 	}
-	
+
 	setInterval(function(){
 		if(1 == 1){
 			update_res();
 		}
 		decompteTemps();
 	}, 1000);
-	
+
 	function capacite() {
 	  var cap = document.getElementById("capacite_restante");
 	  var alliage = document.getElementById("q_alliage");
@@ -300,15 +301,15 @@
 	  var essence = document.getElementById("q_essence");
 	  var pieces = document.getElementById("q_pieces");
 	  var monnaie = document.getElementById("q_monnaie");
-	  
+
 	  var marines = document.getElementById("q_marines");
 	  var total = marines.value;
 	  cap.value = total - (alliage + silicium + petrole + essence + monnaie);
-	  
+
 	  return false; // Annule l'action du lien
 	}
 </script>
-	
+
 
 <script type="text/javascript">
 
@@ -326,19 +327,19 @@ $(function(){
 	$(".stop_construction").mousemove(function(e){
 		var mouseX = e.pageX + 15;
 		var mouseY = e.pageY + 15;
-		
+
 		$(this).children(".info_hover:first").css({'top':mouseY,'left':mouseX});
 	});
-	
+
 	$("#note_perso").click(function(){
 		$(".window_note").fadeIn();
 	});
 	$(".window_shad").click(function(){
 		$(".window_note").fadeOut();
 	});
-	
+
 	$("#text_note").keydown(function(){
-		
+
 		var limit = "220";
 		var currlength = $(this).val().length;
 		if(currlength >= limit){
@@ -347,15 +348,15 @@ $(function(){
 		else{
 			$("#legende").html(currlength + " caract. / " + limit);
 		}
-		
+
 		var len = $(this).val().length;
 		if(len>10)
 		{
 		  $(this).val($(this).val().substr(0,limit));
 		}
 	});
-	
-	
+
+
 	//ressources
 	$(".ressource_bloc").hover(function(e){
 		$(".res_info").hide();
@@ -368,10 +369,10 @@ $(function(){
 	$(".ressource_bloc").mousemove(function(e){
 		var mouseX = e.pageX + 15;
 		var mouseY = e.pageY + 15;
-		
+
 		$(this).children(".res_info:first").css({'top':mouseY,'left':mouseX});
 	});
-	
+
 	});
 
 
@@ -386,7 +387,7 @@ $(function(){
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
-	
+
 </head>
 <body style="background-image:url('img/fond_game.jpg');">
 	<!--img src="img/btn_construire_hover.png" style="display:none" alt="">
@@ -417,7 +418,7 @@ $(function(){
 <img src="img/army_h.png" style="display:none" alt="">
 <img src="img/defense_h.png" style="display:none" alt="">
 <img src="img/marche_h.png" style="display:none" alt="">
-<img src="img/technos_h.png" style="display:none" alt=""-->	
+<img src="img/technos_h.png" style="display:none" alt=""-->
 	<div id='content'>
 		<div id="header_top">
 			<!--div style='float:left; font-size: 0.7em; color:#ca0000; margin-left: 365px;padding-top:3px;'>
@@ -428,35 +429,35 @@ $(function(){
 				<span style='color:yellow'>364</span> inscrits -
 				</span>
 				<span style=''>
-					<span id='connectes_mb' style='color:yellow'>2 </span> en ligne -
+					<span id='connectes_mb' style='color:yellow'>1 </span> en ligne -
 				</span>
-				Heure du serveur 
-				Dundha : <span style='color:yellow'>11h29</span>				<!--
+				Heure du serveur
+				Dundha : <span style='color:yellow'>13h20</span>				<!--
 				<a href='index.php?setlang=fr'><img src="img/fr.png" width="17" height="11" style='margin-left: 8px; margin-top: -3px'/></a>
 				<a href='index.php?setlang=en'><img src="img/en.png" width="17" height="11" style='margin-left: 1px; margin-top: -3px'></a>
 				-->
 			</div>
 		</div>
-		
+
 		<div id="header_player">
-			<img src='img/avatar_default.jpg' id='avatar-img' alt='avatar' />			
+			<img src='img/avatar_default.jpg' id='avatar-img' alt='avatar' />
 			<div style='width:19px;height:19px'>
 			<a href='bonus.php'><div class='mini_lien' style='margin-top:35px;'><img src='img/politique.png' width=16px height=16px title='Choix politiques'/></div></a>
 			<!--a href='talents.php'><div class='mini_lien'><img src='img/talents.png' width=16px height=16px title='Arbre des talents'/></div></a-->
 			</div>
-			
+
 			<div id='note_perso'></div>
-			
-			
+
+
 				<div id='pays_joueur'>
 					<a href='../countries.php' target='_blank'>
 						<div class='flag flag-small flag-small-usa'></div>
 					</a>
 				</div>		</div>
-		
+
 		<div id="header_player_info" style='border:none; background:none; margin-top: 10px;' >
 			<div style=' margin-bottom:4px'>
-			<SELECT class='select_ins' style='padding:0px;background: #111111; color:white;border : 1px solid #313131;font-size:0.9em; height: 25px' onchange="window.location='index.php?chbs='+this.options[this.selectedIndex].value;">
+			<SELECT class='select_ins' style='padding:0px;background: #111111; color:white;border : 1px solid #313131;font-size:0.9em; height: 25px' onchange="window.location='tchat.php?chbs='+this.options[this.selectedIndex].value;">
 					<OPTION selected='selected' value='3490'>Troll&nbsp&nbsp&nbsp
 					[268-248]</OPTION><OPTION  value='4297'>Avant-poste&nbsp&nbsp&nbsp
 					[101-300]</OPTION>
@@ -464,7 +465,7 @@ $(function(){
 			<div style='margin-left: -4px;border-radius: 0px 8px 8px 0px; background: #111111; height: 52px; border: 1px solid #313131; border-left:none; min-width : 200px; padding:5px; padding-top: 3px;'>
 				<div>
 					<div style='margin:2px;margin-top:0px; color: #f9f2d3;font-variant:small-caps; font-size:1.3em'>
-						aezo						<span style='font-size:0.8em;color : #c0b37d'> (398.943)</span>
+						aezo						<span style='font-size:0.8em;color : #c0b37d'> (402.579)</span>
 					</div>
 				</div>
 				<div style='margin-top: 3px; font-variant: small-caps; font-size:1.1em;color: #ad9057;'>
@@ -473,106 +474,106 @@ $(function(){
 					United States of America					 [<i>USA</i>]				</div>
 			</div>
 		</div>
-		
+
 		<div id="header_res"></div>
 		<div id='ressources'>
 			<div class='ressource_bloc'>
 							<div class='ressource_sup' style='background-image: url("img/res_alliage.jpg");background-size:cover;'></div>
 							<div id='res_alliage' class='ressource_inf'>
-								1.963.260
+								2.083.790
 							</div>
 							<div class='res_info info_hover_general' style='display:none; background: black;font-size:1.1em'>
 								<div style='color: #9E90F5; margin-bottom: 5px; text-transform: uppercase'>Alliage</div>
 								<div style='color:white'>65.161 /h</div>
 								<div style='font-size: 0.9em; color: beige'>
-								 <span style='color:grey'>1.963.260 /37.83M</span>
-								
+								 <span style='color:grey'>2.083.790 /37.83M</span>
+
 									<div style='color: yellow; margin-top: 8px;'>
-										151.733 protégés par l'entrepôt
+										144.404 protï¿½gï¿½s par l'entrepï¿½t
 									</div>
 								</div>
 							</div>
 						</div><div class='ressource_bloc'>
 							<div class='ressource_sup' style='background-image: url("img/res_silicium.jpg");background-size:cover;'></div>
 							<div id='res_silicium' class='ressource_inf'>
-								2.419.754
+								2.497.415
 							</div>
 							<div class='res_info info_hover_general' style='display:none; background: black;font-size:1.1em'>
 								<div style='color: #d89558; margin-bottom: 5px; text-transform: uppercase'>Silicium</div>
 								<div style='color:white'>41.985 /h</div>
 								<div style='font-size: 0.9em; color: beige'>
-								 <span style='color:grey'>2.419.754 /37.83M</span>
-								
+								 <span style='color:grey'>2.497.415 /37.83M</span>
+
 									<div style='color: yellow; margin-top: 8px;'>
-										151.734 protégés par l'entrepôt
+										144.404 protï¿½gï¿½s par l'entrepï¿½t
 									</div>
 								</div>
 							</div>
 						</div><div class='ressource_bloc'>
 							<div class='ressource_sup' style='background-image: url("img/res_petrole.jpg");background-size:cover;'></div>
 							<div id='res_petrole' class='ressource_inf'>
-								26.591
+								50.713
 							</div>
 							<div class='res_info info_hover_general' style='display:none; background: black;font-size:1.1em'>
 								<div style='color: #cbc7b9; margin-bottom: 5px; text-transform: uppercase'>Petrole</div>
 								<div style='color:white'>13.041 /h</div>
 								<div style='font-size: 0.9em; color: beige'>
-								 <span style='color:grey'>26.591 /37.83M</span>
-								
+								 <span style='color:grey'>50.713 /37.83M</span>
+
 									<div style='color: yellow; margin-top: 8px;'>
-										26.591 protégés par l'entrepôt
+										50.714 protï¿½gï¿½s par l'entrepï¿½t
 									</div>
 								</div>
 							</div>
 						</div><div class='ressource_bloc'>
 							<div class='ressource_sup' style='background-image: url("img/res_essence.jpg");background-size:cover;'></div>
 							<div id='res_essence' class='ressource_inf'>
-								583.413
+								602.138
 							</div>
 							<div class='res_info info_hover_general' style='display:none; background: black;font-size:1.1em'>
 								<div style='color: #c7bd42; margin-bottom: 5px; text-transform: uppercase'>Essence</div>
 								<div style='color:white'>10.123 /h</div>
 								<div style='font-size: 0.9em; color: beige'>
-								 <span style='color:grey'>583.413 /37.83M</span>
-								
+								 <span style='color:grey'>602.138 /37.83M</span>
+
 									<div style='color: yellow; margin-top: 8px;'>
-										151.733 protégés par l'entrepôt
+										144.404 protï¿½gï¿½s par l'entrepï¿½t
 									</div>
 								</div>
 							</div>
 						</div><div class='ressource_bloc'>
 							<div class='ressource_sup' style='background-image: url("img/res_pieces.jpg");background-size:cover;'></div>
 							<div id='res_pieces' class='ressource_inf'>
-								139.210
+								148.331
 							</div>
 							<div class='res_info info_hover_general' style='display:none; background: black;font-size:1.1em'>
 								<div style='color: #d3a560; margin-bottom: 5px; text-transform: uppercase'>Pieces mecaniques</div>
 								<div style='color:white'>4.931 /h</div>
 								<div style='font-size: 0.9em; color: beige'>
-								 <span style='color:grey'>139.210 /37.83M</span>
-								
+								 <span style='color:grey'>148.331 /37.83M</span>
+
 									<div style='color: yellow; margin-top: 8px;'>
-										139.210 protégés par l'entrepôt
+										144.404 protï¿½gï¿½s par l'entrepï¿½t
 									</div>
 								</div>
 							</div>
 						</div><div style='width: 50px; height:54px; float:left'></div><div class='ressource_bloc'>
 							<div class='ressource_sup' style='background-image: url("img/res_monnaie.jpg");background-size:cover;'></div>
 							<div id='res_monnaie' class='ressource_inf'>
-								6.049.599
+								6.262.440
 							</div>
 							<div class='res_info info_hover_general' style='display:none; background: black;font-size:1.1em'>
 								<div style='color: yellow; margin-bottom: 5px; text-transform: uppercase'>Monnaie</div>
 								<div style='color:white'>115.066 /h</div>
 								<div style='font-size: 0.9em; color: beige'>
-								 <span style='color:grey'>6.049.599 /37.83M</span>
-								
+								 <span style='color:grey'>6.262.440 /37.83M</span>
+
 									<div style='color: yellow; margin-top: 8px;'>
-										151.733 protégés par l'entrepôt
+										144.404 protï¿½gï¿½s par l'entrepï¿½t
 									</div>
 								</div>
 							</div>
-						</div>			
+						</div>
 			<!--div class='ressource_bloc'>
 				<div class='ressource_sup'><img src='img/res_energie.jpg' width=54px height=31px alt='energie' title='Energie' /></div>
 				<div id='res_energie' class='ressource_inf'>1.000				</div>
@@ -581,19 +582,19 @@ $(function(){
 					<div style='color:white'></div>
 					<div style='font-size: 0.9em; color: beige'>
 					 <span style='color:grey'>Aucune information.</span>
-					
+
 						<div style='color: yellow; margin-top: 8px;'>
-							
+
 						</div>
 					</div>
 				</div>
 			</div-->
 			<div class='clear'></div>
 		</div>
-		
-		
+
+
 		<div class='clear'></div> <!-- FIN DU HEADER -->
-		
+
 		<!-- NAVIGATION GAUCHE -->
 		<div id='partie_centrale'>
 			<!-- NAVIGATION GAUCHE -->
@@ -608,9 +609,9 @@ $(function(){
 						Ma base						</div>
 					</div>
 					</a>
-					<a href='build.php'>					
+					<a href='build.php'>
 					<div class="menu_link">
-						<div class='menu_link_title'>Liste des bâtiments</div>
+						<div class='menu_link_title'>Liste des bï¿½timents</div>
 					</div>
 					</a>
 					<a href='production.php'>					<div class="menu_link">
@@ -629,12 +630,12 @@ $(function(){
 					</a>
 										<a href='defense.php'>
 					<div class="menu_link">
-						<div class='menu_link_title'>Systèmes de défense</div>
+						<div class='menu_link_title'>Systï¿½mes de dï¿½fense</div>
 					</div>
 					</a>
 					<a href='troops.php'>
 					<div class="menu_link">
-						<div class='menu_link_title'>Forces armées</div>
+						<div class='menu_link_title'>Forces armï¿½es</div>
 					</div>
 					</a>
 					<a href='mission.php'>
@@ -658,27 +659,27 @@ $(function(){
 						<div class='menu_link_title' style='color:#77A0C9'>WorldTech Inc.</div>
 					</div>
 					</a>
-					
+
 										<a href='my_ally.php'>
 					<div class="menu_link">
 						<div class='menu_link_title'>Mon alliance </div>
 					</div>
 					</a>
-															
-					
+
+
 					<a href='msg.php'>
 					<div class="menu_link">
 						<div class='menu_link_title'>Messagerie (0)</div>
 					</div>
 					</a>
-				
+
 									<a href='marchand.php'>
 					<div class="menu_link">
 						<div class='menu_link_title' style='color: #ED7272'>BlackMarket</div>
 					</div>
 					</a>
 								</div>
-				
+
 				<div class="menu">
 					<div class="menu_top">
 						<div class='menu_top_title'>Navigation</div>
@@ -702,18 +703,18 @@ $(function(){
 						<div class='menu_link_title'>Rechercher</div>
 					</div>
 					</a-->
-					
+
 					<a href='../forum/' target='_blank'>
 					<div class="menu_link">
 						<div class='menu_link_title'>Forum</div>
 					</div>
-					
+
 										<a href='hebdo.php'>
 					<div class="menu_link">
 						<div class='menu_link_title' style='color: orange'>Free World Hebdo</div>
 					</div>
 					</a>
-										
+
 					</a>
 					<a href='index.php?tuto=0'>
 					<div class="menu_link">
@@ -722,10 +723,10 @@ $(function(){
 					</a>
 					<a href='team.php'>
 					<div class="menu_link">
-						<div class='menu_link_title'>L'équipe</div>
+						<div class='menu_link_title'>L'ï¿½quipe</div>
 					</div>
 					</a>
-										
+
 					<a href='account.php'>
 					<div class="menu_link">
 						<div class='menu_link_title'>Mon compte</div>
@@ -733,19 +734,19 @@ $(function(){
 					</a>
 					<a href='../index.php?action=deco'>
 					<div class="menu_link">
-						<div class='menu_link_title_deco'>Déconnexion</div>
+						<div class='menu_link_title_deco'>Dï¿½connexion</div>
 					</div>
 					</a>
-					
+
 				</div>
-				
+
 
 
 <div style='margin:auto;text-align:center;'>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="4ZGP7Z6B25KLU">
-<input type="image" src="http://www.3gm.fr/game/img/don.jpg" border="0" name="submit" alt="Faites un don sécurisé !">
+<input type="image" src="http://www.3gm.fr/game/img/don.jpg" border="0" name="submit" alt="Faites un don sï¿½curisï¿½ !">
 <img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
 </form>
 </div>
@@ -760,317 +761,54 @@ $(function(){
 							<a href='http://www.3gm.fr/simulateur/' target='_blank'>Lien vers le simulateur</a>
 						</div>
 					</div><div class='news_mid'>
-						<div class='news_title'>Caractéristiques</div>
+						<div class='news_title'>Caractï¿½ristiques</div>
 						<div class='news_content'>
-							<a href='http://www.3gm.fr/game/caracts.php' target='_blank'>Lien vers les caractéristiques des unités</a>
+							<a href='http://www.3gm.fr/game/caracts.php' target='_blank'>Lien vers les caractï¿½ristiques des unitï¿½s</a>
 						</div>
 					</div>					<div class="news_bottom"></div>
 				</div>
-								
-				
+
+
 			<div style='margin:auto; width: 100px;'>
 				<a href='http://www.facebook.com/pages/3gm/470603152994472' target='_blank'><div id='facebook_ico'></div></a>
 				<a href='http://twitter.com/3guerremondiale' target='_blank'><div id='tweeter_ico'></div></a>
 				<div class='clear'></div>
 			</div>
-			
+
 			<div style='margin:auto;'>
 							</div>
 
-				
-			
-				
+
+
+
 			</div><!-- FIN PARTIE GAUCHE -->
-			
+
 			<!-- PARTIE DROITE -->
-			
+
 			<div class='centre'>
-				
-<script type='text/javascript'>
-$(function() {
-	$(".orders_mission").hover(function(e){
-		$(".info_hover").hide();
-		$(this).children('.info_hover').fadeIn();
-	}, function(){
-		$(this).children('.info_hover').hide();
-	});
-	$(".orders_mission").mousemove(function(e){
-		var mouseX = e.pageX + 15;
-		var mouseY = e.pageY + 15;
-		
-		$(this).children('.info_hover').css({'top':mouseY,'left':mouseX});
-	});
-	
-	
-	//images building
-	$(".mes_temps").hover(function(e){
-		$(".info_hover").hide();
-		$(".info_hover").hide();
-		$(this).children(".info_hover").fadeIn();
-	}, function(){
-		$(this).children(".info_hover:first").hide();
-	});
-	$(".mes_temps").mousemove(function(e){
-		var mouseX = e.pageX + 15;
-		var mouseY = e.pageY + 15;
-		
-		$(this).children(".info_hover:first").css({'top':mouseY,'left':mouseX});
-	});
-	
-	
-	//messagerie
-	$("#messagerie_hover").hover(function(e){
-		$(".info_hover").hide();
-		$(this).children(".info_hover").fadeIn();
-	}, function(){
-		$(this).children(".info_hover").hide();
-	});
-	$("#messagerie_hover").mousemove(function(e){
-		var mouseX = e.pageX + 15;
-		var mouseY = e.pageY + 15;
-		
-		$(this).children(".info_hover:first").css({'top':mouseY,'left':mouseX});
-	});
-	
-	$('.index-building-resume').hover(function(e){
-		if($(this).hasClass("index-building-resume")) {
-			$('.index-building-resume > span').hide();
-			$(this).children('span').show();
-		}
-	});
-	$(".index-building-resume").mousemove(function(e){
-		var mouseX = e.pageX + 20;
-		var mouseY = e.pageY + 10;
-		
-		$(this).children("span").css({'top':mouseY,'left':mouseX});
-	});
-	
-	$('#index-building-resume').mouseleave (function(){
-		$('.index-building-resume > span').hide();
+				<script type='text/javascript'>
+$(function(){
+	var reglesbtn = $("#regles-btn");
+	var regles = $("#regles");
+
+	reglesbtn.click(function(){
+		regles.fadeToggle(500);
 	});
 });
 </script>
 
-
 <div class='centre_top'>
-	<div class='centre_top_titre'>Ma base</div>
+	<div class='centre_top_titre'>tchat</div>
 </div>
-
-<div class='centre_mid'>
-				<div style='float:left; width: 392px; padding-left: 40px;'>
-		<div class='centre_content' style='padding:0'>
-			<div class='centre_content_title'>Bâtiments en construction			<span style='float: right'>0/3</span></div>		</div>
-		<div class='centre_content' style='padding:0'>
-			<div class='centre_content_title'>Unités en cours de création			<span style='float: right'>142</span></div><div class='centre_content_texte'>
-						<div style='background: #5b5444;text-transform:uppercase;font-size:0.9em;color:beige; width: 100px;text-align:center; padding:4px;margin-left:40px;border-radius: 8px 8px 0px 0px;'>
-							En construction
-						</div>
-						<div style='margin-bottom: 5px; background: #5b5444;border-radius:8px;'>
-							<div style='float:left'><img id='img_u_transport' src='img/Transporteurs maritimes.jpg' alt='' height=40px width=40px /></div>
-							<div style='float:left; margin-left: 5px;padding-top:0px; padding-left: 5px; height:40px'>
-								<div style='color: orange; text-transform: uppercase;padding-top:5px'>Transporteurs maritimes</div>
-								<div style='padding-top:2px' class='mes_temps'>
-									<div class='constructionActuelle' style='display:inline;margin:0;padding:0;cursor:default'>2j 14h 36min 3s</div>
-									<div class='info_hover' style='display:none;background: #1f1d18;color:white; text-align:center; padding-left:8px;padding-right:8px;'>
-										
-										Terminé dans
-										<div class='constructionActuelle' class='tempsPartiel'>2j 14h 36min 3s</div>
-									</div>
-								</div>
-							</div>
-							<div style='float:right ;margin-right:10px ;max-height:40px; font-size: 1.5em;text-align:center; margin-top: 10px;'>
-								142
-							</div>
-							
-							<a href='index.php?a=down&type=unit&inc=0&tk=580348'><div class='down_order'></div></a>
-							
-							<div class='clear'></div>
-						</div></div>		</div>
-		<div class='clear'></div>
-	</div>
-	
-	<div style='float:left; width: 392px'>
-				<div class='centre_content' style='padding:0'>
-			<div class='centre_content_title'>Technologies en recherche			<span style='float: right'></span></div>		</div>
-				<div class='centre_content' style='padding:0'>
-			<div class='centre_content_title'>Défenses en cours de création			</div>		</div>
-		<div class='centre_content' style='padding: 0'>
-			<div class='centre_content_title'>Mouvements de troupes			<span style='float: right'>0/11</span>
-			</div><div class='centre_content_texte' style='background-color:black;' title='Développez les services secrets pour augmenter cette valeur.'><span style='font-size:1.0m; color:grey'>Distance max de détection ennemie : 15h 5min 44s</span></div>			<br/>
+					<div class='centre_mid'>
+			<div class='centre_content'>
+				</br>
+				<p style='text-align:center'>Vous ï¿½tes interdit de tchat pendant encore : <span style='color:orange'>3515j 14h 34min 2s</span></p>
+				</br>
+				<div class='clear'></div>	
+			</div>
 		</div>
-		<div class='clear'></div>
-	</div>
-	
-	<div class='clear'></div>
-	
-	<!--div class='centre_content' style=''>
-		<div class='centre_content_title'>Vue d'ensemble</div>
-		<div class='centre_content_texte'>
-			<table id='rank_table' style='width: 740px; padding;0'>
-				<tr>
-					<th>Centre de production</th>
-					<th>Niveau</th>
-					<th>alliage</th>
-					<th>silicium</th>
-					<th>petrole</th>
-					<th>essence</th>
-					<th>pieces</th>
-					<th>monnaie</th>
-				</tr>
-				<tr>
-						<th style='background:#2E2B24'>Fonderie</th>
-						<td>24</td>
-						<td title='Par jour' style='font-weight:bold;color:#9E90F5'>1.563.867</td>
-						<td colspan=5>-</td>
-					</tr><tr>
-						<th style='background:#2E2B24'>Industrie chimique</th>
-						<td>26</td>
-						<td>-</td>
-						<td title='Par jour' style='font-weight:bold;color:#d89558'>1.007.646</td>
-						<td colspan=4>-</td>
-					</tr><tr>
-						<th style='background:#2E2B24'>Plate-forme Pétrolière</th>
-						<td>21</td>
-						<td colspan=2>-</td>
-						<td title='Par jour' style='font-weight:bold;color:#cbc7b9'>312.981</td>
-						<td title='Par jour' style='font-weight:bold;color:#c7bd42'>242.947</td>
-						<td colspan=2>-</td>
-					</tr><tr>
-						<th style='background:#2E2B24'>Usine</th>
-						<td>22</td>
-						<td colspan=4>-</td>
-						<td title='Par jour' style='font-weight:bold;color:#d3a560'>118.352</td>
-						<td>-</td>
-					</tr><tr>
-						<th style='background:#2E2B24'>Service interne</th>
-						<td>39</td>
-						<td colspan=5>-</td>
-						<td title='Par jour' style='font-weight:bold;color:yellow'>2.761.590</td>
-					</tr><tr>
-						<th style='background:#2E2B24'>Entrepôt</th>
-						<td>13</td>
-						<td colspan=6>Stockage max par ressource : 37.830.000</td>
-					</tr>				
-			</table>
-		</div>
-	</div-->
-	
 
-	
-				
-			<div class='centre_content' style=''>
-		<div class='centre_content_title'>Vue d'ensemble</div>
-		<div class='centre_content_texte' id='index-building-resume'>
-			<div class='index-building-resume'>
-				<span>
-					<b style='color:#9E90F5'>Fonderie</b>
-					Production journalière en alliage
-				</span>
-				<div class='index-building-name'>Fonderie</div>
-				<img src='img/Fonderie.jpg' alt='Fonderie' />
-				<div class='index-building-level'>24</div>
-				<div class='index-building-production' style='color:#9E90F5'>
-					1.563.867				</div>
-			</div>
-			
-			<div class='index-building-resume'>
-				<span>
-					<b style='color:#d89558'>Industrie chimique</b>
-					Production journalière en silicium
-				</span>
-				<div class='index-building-name'>Industrie chimique</div>
-				<img src='img/Industrie chimique.jpg' alt='Industrie chimique' />
-				<div class='index-building-level'>26</div>
-				<div class='index-building-production' style='color:#d89558'>
-					1.007.646				</div>
-			</div>
-			
-			<div class='index-building-resume'>
-				<span>
-					<b style='color:#cbc7b9'>Plate-forme Pétrolière</b>
-					Production journalière en pétrole et en essence
-				</span>
-				<div class='index-building-name'>Plate-forme Pétrolière</div>
-				<img src='img/Plate-forme petroliere.jpg' alt='Plate-forme Pétrolière' />
-				<div class='index-building-level'>21</div>
-				<div class='index-building-production' style='color:#cbc7b9'>
-					312.981				</div>
-				<div class='index-building-production' style='color:#c7bd42'>
-					242.947				</div>
-			</div>
-			
-			<div class='index-building-resume'>
-				<span>
-					<b style='color:#d3a560'>Usine</b>
-					Production journalière en pièces mécaniques
-				</span>
-				<div class='index-building-name'>Usine</div>
-				<img src='img/Usine.jpg' alt='Usine' />
-				<div class='index-building-level'>22</div>
-				<div class='index-building-production' style='color:#d3a560'>
-					118.352				</div>
-			</div>
-			
-			<div class='index-building-resume'>
-				<span>
-					<b style='color:yellow'>Service interne</b>
-					Production journalière en monnaie
-				</span>
-				<div class='index-building-name'>Service interne</div>
-				<img src='img/Service interne.jpg' alt='Service interne' />
-				<div class='index-building-level'>39</div>
-				<div class='index-building-production' style='color:yellow'>
-					2.761.590				</div>
-			</div>
-			
-			<div class='index-building-resume'>
-				<span>
-					<b>Entrepôt</b>
-					Capacité maximum pour chaque ressource
-				</span>
-				<div class='index-building-name'>Entrepôt</div>
-				<img src='img/Entrepot.jpg' alt='Entrepôt' />
-				<div class='index-building-level'>13</div>
-				<div class='index-building-production'>
-					37.830.000				</div>
-			</div>
-			
-			<div class='clear'></div>
-			
-		</div>
-	</div>
-	
-		
-
-	
-	
-		<div class='centre_content'>
-		<br/>
-		<div class='centre_content_title'>Messages du serveur</div>
-		<div class='centre_content_texte'>
-			<div class='news_title_home'>v1.0 - Dundha</div>
-							<div style='padding-left:3px;padding-top:4px; margin-bottom: 10px;'><span style='color:orange'>Mise à jour</span><br />
-- Choix des pays à l'inscription (Dundha)<br />
-- Classement des meilleurs combattants (Dundha)<br />
-    * Les points gagnés lors d'un combat (pas lors de la défense) dépendent du niveau du défenseur par rapport à soi-même (ratio). Si vous attaquez un joueur mieux classé que vous, vous gagnerez beaucoup plus de points !<br />
-- Production d'essence rééquilibrée<br />
-<br />
-<br />
-<br />
-<a href='http://www.3gm.fr/forum/' target='_blank'> Cliquez ici pour poser vos questions sur le FORUM</a> (inscription obligatoire si vous ne possèdez pas déjà un compte)<br />
-<br />
-<a href='http://www.jeux-alternatifs.com/3e-guerre-mondiale-jeu706_hit-parade_1_1.html' target='_blank'>Votez pour 3gm et gagnez des crédits gratuitement !</a><br />
-<br />
-<br />
-<span style='color:orange'>Config actuelle du serveur : </span><br />
-- Pas de limite de temps<br />
-- Carte de 300*300</div>		</div>
-	</div>
-		
-</div>
-
-
-				
 				<div class='clear'></div>
 				<div class='centre_bottom'></div>
 			</div> <!-- fin du centre -->
@@ -1082,18 +820,18 @@ $(function() {
 				<a href='../cgu.php' target='_blank'>CGU</a> - <a href='../wiki/' target='_blank'>Wiki</a> - <a href="mailto:3gm.game@gmail.com">3gm.game@gmail.com</a>
 			</div>
 		</div>
-		
-				
+
+
 		<div id='js_alert_box' style='display:none'>
 			<div class='shadowing' style='display: block;'></div>
 			<div class='fenetre_alert' style='display: block'>
 				<div id='js_alert_box_msg' style='margin: 25px; margin-top: 50px; margin-bottom: 10px'>
-					
+
 				</div>
 				<button type="button" onclick="$('#js_alert_box').hide();" class='submit_ins' style='position: absolute; bottom:13px; right:53px'></button>
 			</div>
 		</div>
-					
+
 		<div class='window' style='display:none'>
 			<div class='window_shad'></div>
 			<div class='window_win'>
@@ -1102,7 +840,7 @@ $(function() {
 		<div class='window_note' style='display:none'>
 			<div class='window_shad'></div>
 			<div class='window_win'>
-				
+
 						<div class='centre'>
 							<span style='color:orange'>Cliquez en dehors du cadre pour quitter</span>
 							<div class='centre_top2'></div>
@@ -1116,7 +854,7 @@ $(function() {
 									</div>
 									<div id='legende' class='insuffisant'></div>
 									<input type=submit value='Valider' name='note' class='' />
-									<div class='clear'></div>	
+									<div class='clear'></div>
 								</div>
 							</div>
 							</form>
@@ -1128,4 +866,4 @@ $(function() {
 </body>
 </html>
 
-{'serveur': 3, 'connexion': '', 'email': 'aezo', 'pass': '26041994'}
+(False, None)
