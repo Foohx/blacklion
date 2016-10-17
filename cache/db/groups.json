@@ -1,0 +1,55 @@
+{
+    "groups": [
+        {
+            "id": 0,
+            "name": "Unlock",
+            "actions": [
+                {
+                    "id": 0,
+                    "entity": "Fonderie",
+                    "level": 3
+                },
+                {
+                    "id": 0,
+                    "entity": "Industrie chimique",
+                    "level": 3
+                },
+                {
+                    "id": 0,
+                    "entity": "Parlement",
+                    "level": 3
+                },
+                {
+                    "id": 1,
+                    "entity": "Service interne",
+                    "level": 1
+                },
+                {
+                    "id": 1,
+                    "entity": "Parlement",
+                    "level": 5
+                },
+                {
+                    "id": 1,
+                    "entity": "Fonderie",
+                    "level": 5
+                },
+                {
+                    "id": 1,
+                    "entity": "Industrie chimique",
+                    "level": 5
+                },
+                {
+                    "id": 2,
+                    "entity": "Service interne",
+                    "level": 4
+                },
+                {
+                    "id": 2,
+                    "entity": "Ambassade",
+                    "level": 2
+                },
+            ]
+        }
+    ]
+}

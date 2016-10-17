@@ -20,6 +20,9 @@ class ThirdWorldWar:
         r = self.s.get('http://www.3gm.fr/game/index.php')
         return self.isLogged()
 
+    def rTuto(self):
+        r = self.s.get('http://www.3gm.fr/game/production.php?tuto=8')
+
     def rLogout(self):
         r = self.s.get('http://www.3gm.fr/index.php?action=deco')
         return True if not self.isLogged() else False
