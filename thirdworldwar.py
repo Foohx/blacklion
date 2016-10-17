@@ -99,8 +99,19 @@ class ThirdWorldWar:
         t = html.fromstring(r.content)
         techs = t.xpath("//div[@class='info_hover_general']/span/text()")
         links = t.xpath("//div[contains(@id, 'sous_techno_t_')]/div/div/a/@href")
+        costs = t.xpath("//div[@class='points_budget']/div[not(@class)]/text()")
+        lvmax = t.xpath("//div[contains(@id, 'sous_techno_t_')]/div[not(@class)]/div[not(@class)]/text()")
+        new_lvlmax = []
+        i = 0
+        for lvl_max in lvmax:
+            bkup = lvl_max
+            lvl_max = lvl_max.strip()
+            if lvl_max != "" and len(lvl_max) <4:
+                new_lvlmax.insert(i, int(lvl_max.split('/')[1]))
+                i = i+1
+        lvmax = new_lvlmax
         technos = []
-        for tech in techs:
+        for tech, lvl_max in zip(techs, lvmax):
             m = re.search('\(([0-9]+)\)', tech)
             if m != None:
                 can_build = False
@@ -115,11 +126,16 @@ class ThirdWorldWar:
                         else :
                             can_build = True
                         break
+                cost = False
+                if level != lvl_max:
+                    cost = costs.pop(0)
                 technos.insert(-1, {
                     'name': name,
                     'available': can_build,
                     'feed': in_feed,
-                    'level': level
+                    'level': level,
+                    'level_max': lvl_max,
+                    'cost': cost
                 })
         return technos
 
