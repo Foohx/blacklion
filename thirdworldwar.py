@@ -130,6 +130,27 @@ class ThirdWorldWar:
             })
         return defenses
 
+    def getFeeds(self):
+        r = self.s.get('http://www.3gm.fr/game/index.php')
+        t = html.fromstring(r.content)
+        feeds = [
+            {'name': 'Buildings', 'keywords': 'en construction'},
+            {'name': 'Units', 'keywords': 'Unit'},
+            {'name': 'Technologies', 'keywords': 'Technologies en recherche'},
+            {'name': 'Defenses', 'keywords': 'fenses en cours de cr'},
+            {'name': 'Troops', 'keywords': 'Mouvements de troupes'}
+        ]
+        for feed in feeds:
+            qty_value = t.xpath('//div[@class="centre_content_title" and contains(text(),"'+feed['keywords']+'")]/span/text()')
+            if len(qty_value) > 0:
+                qty = qty_value[0].split('/')
+                qty = [int(qty[0]), int(qty[1])]
+            else : qty = [0,0]
+            feed.pop('keywords', None)
+            feed['actives'] = qty[0]
+            feed['max'] = qty[1]
+        return feeds
+
     def isLogged(self):
         r = self.s.get('http://www.3gm.fr/game/index.php')
         tree = html.fromstring(r.content)
