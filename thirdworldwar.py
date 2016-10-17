@@ -116,13 +116,17 @@ class ThirdWorldWar:
             if m != None:
                 can_build = False
                 in_feed = False
+                can_activate = False
                 name = tech.split(' ')[0]
                 level = int(m.group(1))
                 for l in links:
                     if name.lower() in l:
                         m = re.search('a=stop', l)
-                        if m != None:
+                        m2 = re.search('a=activer', l)
+                        if m != None and m2 == None:
                             in_feed = True
+                        elif m == None and m2 != None:
+                            can_activate = True
                         else :
                             can_build = True
                         break
@@ -133,6 +137,7 @@ class ThirdWorldWar:
                     'name': name,
                     'available': can_build,
                     'feed': in_feed,
+                    'activable': can_activate,
                     'level': level,
                     'level_max': lvl_max,
                     'cost': cost
