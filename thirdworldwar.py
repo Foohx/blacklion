@@ -2,7 +2,6 @@
 import requests
 import re
 from lxml import html
-from scrapy.selector import Selector
 
 class ThirdWorldWar:
 
@@ -182,7 +181,10 @@ class ThirdWorldWar:
             qty_value = t.xpath('//div[@class="centre_content_title" and contains(text(),"'+feed['keywords']+'")]/span/text()')
             if len(qty_value) > 0:
                 qty = qty_value[0].split('/')
-                qty = [int(qty[0]), int(qty[1])]
+                if len(qty) > 1:
+                    qty = [int(qty[0]), int(qty[1])]
+                else :
+                    qty = [int(qty[0]), 0]
             else : qty = [0,0]
             feed.pop('keywords', None)
             feed['actives'] = qty[0]
