@@ -95,6 +95,36 @@ class ThirdWorldWar:
                 })
         return buildings
 
+    def getTechnology(self):
+        r = self.s.get('http://www.3gm.fr/game/techno.php')
+        t = html.fromstring(r.content)
+        techs = t.xpath("//div[@class='info_hover_general']/span/text()")
+        links = t.xpath("//div[contains(@id, 'sous_techno_t_')]/div/div/a/@href")
+        technos = []
+        for tech in techs:
+            m = re.search('\(([0-9]+)\)', tech)
+            if m != None:
+                can_build = False
+                in_feed = False
+                name = tech.split(' ')[0]
+                level = int(m.group(1))
+                for l in links:
+                    if name.lower() in l:
+                        m = re.search('a=stop', l)
+                        if m != None:
+                            in_feed = True
+                        else :
+                            can_build = True
+                        break
+                technos.insert(-1, {
+                    'name': name,
+                    'available': can_build,
+                    'feed': in_feed,
+                    'level': level
+                })
+        return technos
+
+
     def getTroops(self):
         r = self.s.get('http://www.3gm.fr/game/troops.php')
         t = html.fromstring(r.content)
