@@ -77,12 +77,20 @@ class ThirdWorldWar:
             buildAble = t.xpath('//div[@class="build_content"]/div/a/@href')
             for name, lvl in zip(buildName, buildLevl):
                 can_build = False
+                in_feed = False
                 if any(name in links for links in buildAble):
                     can_build = True
+                    for link in buildAble:
+                        if name in link:
+                            m = re.search("ub=", link)
+                            if m != None:
+                                can_build = False
+                                in_feed = True
                 buildings.insert(-1, {
                     'name': name,
                     'level': lvl,
                     'available': can_build,
+                    'feed': in_feed,
                     'page': page
                 })
         return buildings
