@@ -83,7 +83,77 @@
                     "id": 3,
                     "entity": "Entrepot",
                     "level": 1
-                }
+                },
+                {
+                    "id": 4,
+                    "entity": "Plate-forme petroliere",
+                    "level": 9
+                },
+                {
+                    "id": 4,
+                    "entity": "Fonderie",
+                    "level": 10
+                },
+                {
+                    "id": 4,
+                    "entity": "Industrie chimique",
+                    "level": 10
+                },
+                {
+                    "id": 4,
+                    "entity": "Laboratoire scientifique",
+                    "level": 3
+                },
+                {
+                    "id": 4,
+                    "entity": "Etat major",
+                    "level": 1
+                },
+                {
+                    "id": 5,
+                    "entity": "Raffinage",
+                    "level": 2
+                },
+                {
+                    "id": 5,
+                    "entity": "Industrie chimique",
+                    "level": 11
+                },
+                {
+                    "id": 5,
+                    "entity": "Fonderie",
+                    "level": 11
+                },
+                {
+                    "id": 5,
+                    "entity": "Service interne",
+                    "level": 5
+                },
+                {
+                    "id": 6,
+                    "entity": "Usine",
+                    "level": 2
+                },
+                {
+                    "id": 6,
+                    "entity": "Etat major",
+                    "level": 4
+                },
+                {
+                    "id": 6,
+                    "entity": "Camp militaire",
+                    "level": 7
+                },
+                {
+                    "id": 6,
+                    "entity": "Service interne",
+                    "level": 8
+                },
+                {
+                    "id": 6,
+                    "entity": "Parlement",
+                    "level": 6
+                },
             ]
         }
     ]
