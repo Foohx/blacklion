@@ -1,14 +1,36 @@
 # coding: utf-8
 import sys
 import time
+import datetime
+import random
+from colorama import init, Fore, Back, Style
 from jsondb.db import Database
 from thirdworldwar import *
 
 if __name__ != "__main__":
     sys.exit(1)
 
+init(autoreset=True)
 dbAccounts = Database("cache/db/accounts.json")
 dbGroups = Database("cache/db/groups.json")
+
+def log(prefix, text, line=False):
+    now = datetime.datetime.now()
+    message = ""
+    if prefix == '?':
+        c = Fore.CYAN
+    elif prefix == '+':
+        c = Fore.GREEN
+    elif prefix == '-':
+        c = Fore.RED
+    elif prefix == '!':
+        c = Fore.YELLOW
+    c = Style.BRIGHT + c
+    e = Style.RESET_ALL + Fore.RESET
+    if line:
+        print c+"["+now.strftime("%Y-%m-%d %H:%M")+"]["+prefix+"] "+text+e
+    else :
+        print "["+now.strftime("%Y-%m-%d %H:%M")+"]["+c+prefix+e+"] "+text
 
 def selectGroup(gid):
     for group in dbGroups.data()['groups']:
@@ -63,18 +85,18 @@ def isNameAvailable(search, into):
 
 # Loading and login accounts
 users = []
-print("[+] Loading users..")
+log("?", "Loading users..", True)
 for user in dbAccounts.data()['users']:
     handle = ThirdWorldWar(user['nickname'], user['password'], user['server'])
     if not handle.rLogin():
-        print("[N] Login for user \""+user['email']+"\"")
+        log('-', "Login for user \""+user['email']+"\"", False)
         continue
-    print("[Y] Login for user \""+user['email']+"\"")
+    log('+', "Login for user \""+user['email']+"\"", False)
     group = selectGroup(user['group'])
     if group == None:
-        print("[N] Group "+str(user['group'])+" does not exist !")
+        log('-', "Group "+str(user['group'])+" does not exist !", False)
         continue
-    print("[Y] Group \""+group['name']+"\" selected")
+    log("?", "Group \""+group['name']+"\" selected", False)
     users.append({
         'user': handle,
         'group': group
@@ -82,20 +104,33 @@ for user in dbAccounts.data()['users']:
 
 # Startup life loop
 while len(users) > 0:
-    print("[+] Loop life !")
+    log("?", "Starting loop life..", True)
     for user in users:
-        print("[I] User \""+user['user'].account['email']+"\" was selected")
+        log("!", "User \""+user['user'].account['email']+"\" was selected !", True)
         feed = user['user'].getFeeds()
-        if len(feed) == 0: continue
+        if len(feed) == 0:
+            log("-", "Getting feed !", False)
+            continue
+        log("+", "Getting feed !", False)
         user['builds'] = user['user'].getBuildings()
+        if len(user['builds']) == 0:
+            log("-", "Getting buildings..")
+        else:
+            log("+", "Getting buildings..")
         user['techs'] = user['user'].getTechnology()
+        if len(user['techs']) == 0:
+            log("-", "Getting technology..")
+        else :
+            log("+", "Getting technology..")
         step = selectStep([user['builds'], user['techs']])
         actions = selectActions(step)
         if actions == None:
-            print("[I] User is level ("+str(step)+") max")
+            log("-", "User is level max ("+str(step)+") in \""+user['group']['name']+"\"")
             continue
         else :
-            print("[I] User is level ("+str(step)+")")
+            log("?", "User is level ("+str(step)+") in \""+user['group']['name']+"\"")
+
+        # Manage buildings
         i = getIndexFor('Buildings', feed)
         if int(feed[i]['actives']) < int(feed[i]['max']):
             n = int(feed[i]['actives'])
@@ -104,14 +139,18 @@ while len(users) > 0:
                 if b and int(data['level']) < int(action['level']):
                     r = user['user'].rStartBuilding(action['entity'])
                     if r:
-                        print("[Y] Starting \""+action['entity']+"\"")
+                        log('+', "Starting building \""+action['entity']+"\"", True)
                         n = n +1
                     else:
-                        print("[N] Starting \""+action['entity']+"\"")
+                        log("-", "Starting building \""+action['entity']+"\"", True)
                     if n == int(feed[i]['max']):
                         break
         else :
-            print("[-] Building feed is full !")
+            log("-", "Building feed is full !", True)
 
+        # Manage techs
+        
 
-    time.sleep(60)
+    pause = random.randint(1,10)
+    log("?", "Waiting for "+str(pause)+" minutes..", True)
+    time.sleep(60*pause)
