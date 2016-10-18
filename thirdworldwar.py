@@ -65,6 +65,37 @@ class ThirdWorldWar:
         # print(r.content)
         return True
 
+    def rStartBuilding(self, name):
+        buildings = self.getBuildings()
+        if len(buildings) == 0:
+            return False
+        for building in buildings:
+            if building['name'] != name: continue
+            if not building['available']:
+                return False
+            r = self.s.get('http://www.3gm.fr/game/'+building['page'])
+            r, token = self.getToken(r.content)
+            if not r:
+                return False
+            r = self.s.get('http://www.3gm.fr/game/'+building['page']+'?b='+building['name']+'&tk='+token)
+            return True
+
+    def rStopBuilding(self, name):
+        buildings = self.getBuildings()
+        if len(buildings) == 0:
+            return False
+        for building in buildings:
+            if building['name'] != name: continue
+            if not building['feed']:
+                return False
+            r = self.s.get('http://www.3gm.fr/game/'+building['page'])
+            r, token = self.getToken(r.content)
+            if not r:
+                return False
+            r = self.s.get('http://www.3gm.fr/game/'+building['page']+'?ub='+building['name']+'&tk='+token)
+            return True
+
+
     def getBuildings(self):
         buildings = []
         pages = ['build.php', 'production.php', 'army.php']

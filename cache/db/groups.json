@@ -154,6 +154,21 @@
                     "entity": "Parlement",
                     "level": 6
                 },
+                {
+                    "id": 6,
+                    "entity": "Entrepot",
+                    "level": 2
+                },
+                {
+                    "id": 6,
+                    "entity": "Industrie chimique",
+                    "level": 15
+                },
+                {
+                    "id": 6,
+                    "entity": "Fonderie",
+                    "level": 15
+                }
             ]
         }
     ]
