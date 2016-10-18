@@ -136,6 +136,16 @@
                 },
                 {
                     "id": 6,
+                    "entity": "Marche mondial",
+                    "level": 1
+                },
+                {
+                    "id": 6,
+                    "entity": "Trading",
+                    "level": 1
+                },
+                {
+                    "id": 6,
                     "entity": "Etat major",
                     "level": 4
                 },

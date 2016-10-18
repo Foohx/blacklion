@@ -95,6 +95,22 @@ class ThirdWorldWar:
             r = self.s.get('http://www.3gm.fr/game/'+building['page']+'?ub='+building['name']+'&tk='+token)
             return True
 
+    def rTechActivate(self, name):
+        r = self.s.get('http://www.3gm.fr/game/techno.php')
+        r, token = self.getToken(r.content)
+        if not r:
+            return False
+        r = self.s.get('http://www.3gm.fr/game/techno.php?a=activer&tech=t_'+name.lower()+'&tk='+token)
+        return True
+
+    def rTechStart(self, name):
+        r = self.s.get('http://www.3gm.fr/game/techno.php')
+        r, token = self.getToken(r.content)
+        if not r:
+            return False
+        r = self.s.get('http://www.3gm.fr/game/techno.php?a=lancer&tech=t_'+name.lower()+'&tk='+token)
+        return True
+
 
     def getBuildings(self):
         buildings = []

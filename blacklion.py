@@ -80,7 +80,7 @@ def getIndexFor(search, into):
 def isNameAvailable(search, into):
     for i in into:
         if i['name'] == search:
-            return i['available'], i
+            return True, i
     return False, []
 
 # Loading and login accounts
@@ -131,12 +131,13 @@ while len(users) > 0:
             log("?", "User is level ("+str(step)+") in \""+user['group']['name']+"\"")
 
         # Manage buildings
+        #   just for read in feed
         i = getIndexFor('Buildings', feed)
         if int(feed[i]['actives']) < int(feed[i]['max']):
             n = int(feed[i]['actives'])
             for action in actions:
                 b, data = isNameAvailable(action['entity'], user['builds'])
-                if b and int(data['level']) < int(action['level']):
+                if b and data['available']==True and int(data['level']) < int(action['level']):
                     r = user['user'].rStartBuilding(action['entity'])
                     if r:
                         log('+', "Starting building \""+action['entity']+"\"", True)
@@ -149,8 +150,24 @@ while len(users) > 0:
             log("-", "Building feed is full !", True)
 
         # Manage techs
-        
-
+        if len(user['techs']) > 0:
+            for action in actions:
+                b, data = isNameAvailable(action['entity'], user['techs'])
+                if b and int(data['level']) < int(action['level']):
+                    # is tech need to be activate ?
+                    if data['activable'] == True:
+                        r = user['user'].rTechActivate(data['name'])
+                        if r:
+                            log('+', "Technology \""+action['entity']+"\" activated", True)
+                        else :
+                            log('-', "Technology \""+action['entity']+"\" not activated", True)
+                    elif data['available'] == True and not data['feed']:
+                        r = user['user'].rTechStart(data['name'])
+                        if r:
+                            log('+', "Starting technology \""+action['entity']+"\"", True)
+                        else :
+                            log('-', "Starting technology \""+action['entity']+"\"", True)
+                                                  
     pause = random.randint(1,10)
     log("?", "Waiting for "+str(pause)+" minutes..", True)
     time.sleep(60*pause)
