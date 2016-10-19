@@ -111,6 +111,45 @@ class ThirdWorldWar:
         r = self.s.get('http://www.3gm.fr/game/techno.php?a=lancer&tech=t_'+name.lower()+'&tk='+token)
         return True
 
+    def rMission(self, x, y):
+        r = self.s.get('http://www.3gm.fr/game/mission.php')
+        r, token = self.getToken(r.content)
+        if not r:
+            return False
+        r = self.s.post('http://www.3gm.fr/game/mission.php', data={
+            'tk': token,
+            'q_Transporteurs_maritimes': 30,
+            'q_Freemens': 0,
+            'q_Tanks_urbains': 0,
+            'q_Wingfires': 0,
+            'q_Croiseurs': 0,
+            'x': x,
+            'y': y,
+            'mission': 'transport',
+            'send': ''
+        })
+        r, token = self.getToken(r.content)
+        if not r:
+            return False
+        r = self.s.post('http://www.3gm.fr/game/mission.php', data={
+            'tk': token,
+            'q_alliage': 500000,
+            'q_silicium': 500000,
+            'q_petrole': 500000,
+            'q_essence': 500000,
+            'q_pieces': 500000,
+            'q_monnaie': 500000,
+            'x': x,
+            'y': y,
+            'mission': 'transport',
+            'q_Transporteurs_maritimes': 30,
+            'q_Freemens': 0,
+            'q_Wingfires': 0,
+            'q_Croiseurs': 0,
+            'send2': '',
+            'speed': 500
+        })
+        return True
 
     def getBuildings(self):
         buildings = []
@@ -267,20 +306,21 @@ class ThirdWorldWar:
             return False
         return True
 
-    def getToken(self, html=False):
-        if not html:
+    def getToken(self, code=False):
+        if not code:
             r = self.s.get('http://www.3gm.fr/game/index.php')
-            html = r.content
+            code = r.content
         expr = [
             '&tk=([a-z0-9]+)',
             'tk=([a-z0-9]+)',
+            "name='tk' value='([a-z0-9]+)'",
             "<input type=hidden value='([a-z0-9]+)' name='tk' \/>",
             "<input type='hidden' name='tk' value='([a-z0-9]+)'/>",
-            "<input type=\"hidden\" name=\"tk\" value='([a-z0-9]+)' \/>"
+            "<input type=\"hidden\" name=\"tk\" value='([a-z0-9]+)' \/>",
         ]
         token = None
         for e in expr:
-            m = re.search(e, html)
+            m = re.search(e, code)
             if m != None:
                 token = m.group(1)
                 break

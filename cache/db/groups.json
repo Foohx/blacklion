@@ -178,6 +178,51 @@
                     "id": 6,
                     "entity": "Fonderie",
                     "level": 15
+                },
+                {
+                    "id": 7,
+                    "entity": "Camp militaire",
+                    "level": 9
+                },
+                {
+                    "id": 7,
+                    "entity": "Etat major",
+                    "level": 5
+                },
+                {
+                    "id": 7,
+                    "entity": "Marche mondial",
+                    "level": 3
+                },
+                {
+                    "id": 7,
+                    "entity": "Hangar",
+                    "level": 2
+                },
+                {
+                    "id": 7,
+                    "entity": "Industrie chimique",
+                    "level": 20
+                },
+                {
+                    "id": 7,
+                    "entity": "Fonderie",
+                    "level": 20
+                },
+                {
+                    "id": 7,
+                    "entity": "Plate-forme petroliere",
+                    "level": 15
+                },
+                {
+                    "id": 7,
+                    "entity": "Usine",
+                    "level": 5
+                },
+                {
+                    "id": 7,
+                    "entity": "Service interne",
+                    "level": 10
                 }
             ]
         }
