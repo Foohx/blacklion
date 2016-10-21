@@ -5,126 +5,30 @@
             "name": "Unlock Fast",
             "actions": [
                 {"id": 0,"entity": "Fonderie","level": 3},
-                {
-                    "id": 0,
-                    "entity": "Industrie chimique",
-                    "level": 3
-                },
-                {
-                    "id": 0,
-                    "entity": "Parlement",
-                    "level": 3
-                },
-                {
-                    "id": 1,
-                    "entity": "Service interne",
-                    "level": 1
-                },
-                {
-                    "id": 1,
-                    "entity": "Parlement",
-                    "level": 5
-                },
-                {
-                    "id": 1,
-                    "entity": "Fonderie",
-                    "level": 5
-                },
-                {
-                    "id": 1,
-                    "entity": "Industrie chimique",
-                    "level": 5
-                },
-                {
-                    "id": 2,
-                    "entity": "Service interne",
-                    "level": 4
-                },
-                {
-                    "id": 2,
-                    "entity": "Ambassade",
-                    "level": 2
-                },
-                {
-                    "id": 2,
-                    "entity": "Fonderie",
-                    "level": 8
-                },
-                {
-                    "id": 2,
-                    "entity": "Industrie chimique",
-                    "level": 8
-                },
-                {
-                    "id": 3,
-                    "entity": "Fonderie",
-                    "level": 9
-                },
-                {
-                    "id": 3,
-                    "entity": "Industrie chimique",
-                    "level": 9
-                },
-                {
-                    "id": 3,
-                    "entity": "Laboratoire scientifique",
-                    "level": 2
-                },
-                {
-                    "id": 3,
-                    "entity": "Extraction",
-                    "level": 1
-                },
-                {
-                    "id": 3,
-                    "entity": "Entrepot",
-                    "level": 1
-                },
-                {
-                    "id": 4,
-                    "entity": "Plate-forme petroliere",
-                    "level": 9
-                },
-                {
-                    "id": 4,
-                    "entity": "Fonderie",
-                    "level": 10
-                },
-                {
-                    "id": 4,
-                    "entity": "Industrie chimique",
-                    "level": 10
-                },
-                {
-                    "id": 4,
-                    "entity": "Laboratoire scientifique",
-                    "level": 3
-                },
-                {
-                    "id": 4,
-                    "entity": "Etat major",
-                    "level": 1
-                },
-                {
-                    "id": 5,
-                    "entity": "Raffinage",
-                    "level": 2
-                },
-                {
-                    "id": 5,
-                    "entity": "Industrie chimique",
-                    "level": 11
-                },
-                {
-                    "id": 5,
-                    "entity": "Fonderie",
-                    "level": 11
-                },
-                {
-                    "id": 5,
-                    "entity": "Service interne",
-                    "level": 5
-                },
+                {"id": 0,"entity": "Industrie chimique","level": 3},
+                {"id": 0,"entity": "Parlement","level": 3},
+                {"id": 1,"entity": "Service interne","level": 1},
+                {"id": 1,"entity": "Parlement","level": 5},
+                {"id": 1,"entity": "Fonderie","level": 5},
+                {"id": 1,"entity": "Industrie chimique","level": 5},
+                {"id": 2,"entity": "Service interne","level": 4},
+                {"id": 2,"entity": "Ambassade","level": 2},
+                {"id": 2,"entity": "Fonderie","level": 8},
+                {"id": 2,"entity": "Industrie chimique","level": 8},
+                {"id": 3,"entity": "Fonderie","level": 9},
+                {"id": 3,"entity": "Industrie chimique","level": 9},
+                {"id": 3,"entity": "Laboratoire scientifique","level": 2},
+                {"id": 3,"entity": "Extraction","level": 1},
+                {"id": 3,"entity": "Entrepot","level": 1},
+                {"id": 4,"entity": "Plate-forme petroliere","level": 9},
+                {"id": 4,"entity": "Fonderie","level": 10},
+                {"id": 4,"entity": "Industrie chimique","level": 10},
+                {"id": 4,"entity": "Laboratoire scientifique","level": 3},
+                {"id": 4,"entity": "Etat major","level": 1},
+                {"id": 5,"entity": "Raffinage","level": 2},
+                {"id": 5,"entity": "Industrie chimique","level": 11},
+                {"id": 5,"entity": "Fonderie","level": 11},
+                {"id": 5,"entity": "Service interne","level": 5},
                 {"id": 6,"entity": "Usine","level": 2},
                 {"id": 6,"entity": "Marche mondial","level": 1},
                 {"id": 6,"entity": "Trading","level": 1},
@@ -142,7 +46,7 @@
                 {"id": 7,"entity": "Industrie chimique","level": 19},
                 {"id": 7,"entity": "Fonderie","level": 18},
                 {"id": 7,"entity": "Plate-forme petroliere","level": 15},
-                {"id": 7,"entity": "Usine","level": 6},
+                {"id": 7,"entity": "Usine","level": 8},
                 {"id": 7,"entity": "Service interne","level": 10}
             ]
         }
