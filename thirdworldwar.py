@@ -137,7 +137,7 @@ class ThirdWorldWar:
             'q_silicium': 500000,
             'q_petrole': 500000,
             'q_essence': 500000,
-            'q_pieces': 500000,
+            'q_pieces': 0,
             'q_monnaie': 500000,
             'x': x,
             'y': y,
