@@ -1,6 +1,8 @@
 # coding: utf-8
 import requests
 import re
+from datetime import datetime
+import time
 from lxml import html
 
 class ThirdWorldWar:
@@ -150,6 +152,39 @@ class ThirdWorldWar:
             'speed': 500
         })
         return True
+
+    def getChatAlliance(self):
+        r = self.s.get('http://www.3gm.fr/game/my_ally.php')
+        # remove all br tags because xpath consider a text with it like a new div (message)
+        code = r.content
+        code = re.sub('<br />','', code)
+        # after continue simply
+        t = html.fromstring(code)
+        text = t.xpath('//div[@class="centre_content_texte"]/div/div/div/text()')
+        stamps = t.xpath('//div[@class="centre_content_texte"]/div/div/div/div/text()')
+        messages = []
+        for t in text:
+            if t.strip() != "":
+                messages.insert(len(messages), t.strip())
+        chat = []
+        for m, s in zip(messages, stamps):
+            # need to remove the a with accent
+            timestamp = s.split(' ')
+            if len(timestamp) == 3:
+                timestamp = timestamp[0]+' '+timestamp[2]
+            else :
+                now = datetime.now()
+                timestamp = str(now.day)+'-'+str(now.month)+'-'+str(now.year)+' '+timestamp[0]
+            # ready for conversion to datetime object and to timestamp
+            timestamp = datetime.strptime(timestamp, '%d-%m-%Y %Hh%M')
+            timestamp = int(time.mktime(timestamp.timetuple()))
+            chat.insert(len(chat), {
+                'date': s,
+                'message': m,
+                'timestamp': timestamp,
+                'elasped': int(time.time())-timestamp
+            })
+        return chat
 
     def getBuildings(self):
         buildings = []
