@@ -153,6 +153,40 @@ class ThirdWorldWar:
         })
         return True
 
+    def getMap(self, x, y):
+        r = self.s.get('http://www.3gm.fr/game/map.php?x='+str(x)+'&y='+str(y))
+        t = html.fromstring(r.content)
+        bases = t.xpath('//div[@class="infos_map"]/div/text()')
+        coords = t.xpath('//div[@class="img_action"]/a/@href')
+        f_bases = []
+        n = 0
+        i = 0
+        for b in bases:
+            if b.strip() != "":
+                if i == 0:
+                    f_bases.insert(n, {
+                        'name': b.strip()
+                    })
+                    i = i+1
+                elif i == 1:
+                    f_bases[n]['user'] = b.strip()
+                    i = 0
+                    n = n+1
+        n = 0
+        i = False
+        for c in coords:
+            if 'msg.php' in c:
+                if i == True:
+                    n = n +1
+                elif i == False:
+                    i = True
+            elif 'mission.php' in c:
+                m = re.search("x=([0-9]+)&y=([0-9]+)", c)
+                if m != None:
+                    f_bases[n]['x'] = m.group(1)
+                    f_bases[n]['y'] = m.group(2)
+        return f_bases
+
     def getChatAlliance(self):
         r = self.s.get('http://www.3gm.fr/game/my_ally.php')
         # remove all br tags because xpath consider a text with it like a new div (message)
