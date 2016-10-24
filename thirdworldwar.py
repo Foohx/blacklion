@@ -154,7 +154,11 @@ class ThirdWorldWar:
         return True
 
     def getMap(self, x, y):
-        r = self.s.get('http://www.3gm.fr/game/map.php?x='+str(x)+'&y='+str(y))
+        r = None
+        try:
+            r = self.s.get('http://www.3gm.fr/game/map.php?x='+str(x)+'&y='+str(y))
+        except requests.exceptions.ConnectionError:
+            return []
         t = html.fromstring(r.content)
         bases = t.xpath('//div[@class="infos_map"]/div/text()')
         coords = t.xpath('//div[@class="img_action"]/a/@href')
@@ -183,8 +187,8 @@ class ThirdWorldWar:
             elif 'mission.php' in c:
                 m = re.search("x=([0-9]+)&y=([0-9]+)", c)
                 if m != None:
-                    f_bases[n]['x'] = m.group(1)
-                    f_bases[n]['y'] = m.group(2)
+                    f_bases[n]['x'] = int(m.group(1))
+                    f_bases[n]['y'] = int(m.group(2))
         return f_bases
 
     def getChatAlliance(self):
@@ -203,14 +207,17 @@ class ThirdWorldWar:
         chat = []
         for m, s in zip(messages, stamps):
             # need to remove the a with accent
-            timestamp = s.split(' ')
+            timestamp = s.strip().split(' ')
             if len(timestamp) == 3:
-                timestamp = timestamp[0]+' '+timestamp[2]
+                timestamp = timestamp[0].strip()+' '+timestamp[2].strip()
             else :
                 now = datetime.now()
-                timestamp = str(now.day)+'-'+str(now.month)+'-'+str(now.year)+' '+timestamp[0]
+                timestamp = str(now.day)+'-'+str(now.month)+'-'+str(now.year)+' '+timestamp[0].strip()
             # ready for conversion to datetime object and to timestamp
-            timestamp = datetime.strptime(timestamp, '%d-%m-%Y %Hh%M')
+            try:
+                timestamp = datetime.strptime(timestamp, '%d-%m-%Y %Hh%M')
+            except ValueError:
+                continue
             timestamp = int(time.mktime(timestamp.timetuple()))
             chat.insert(len(chat), {
                 'date': s,
