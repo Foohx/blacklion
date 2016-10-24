@@ -153,6 +153,63 @@ class ThirdWorldWar:
         })
         return True
 
+    def getRanking(self, name="global"):
+        scanDate = int(time.time())
+        ranking = []
+        exist = True
+        i = 1
+        while exist:
+            users = []
+            r = self.s.get('http://www.3gm.fr/game/rank.php?lnk='+name+'&min='+str(i))
+            t = html.fromstring(r.content)
+            ranks = t.xpath('//table[@id="rank_table"]/tr/td/a/text()')
+            ranks2 = t.xpath('//table[@id="rank_table"]/tr/td/text()')
+            # for r in ranks:
+            #     print(r)
+            if len(ranks) == 0:
+                exist = False
+            i = i +100
+            # print(ranks)
+            # print(ranks2)
+            elements = 0
+            v = []
+            for r in ranks:
+                m = re.search('([0-9]+) - ([0-9]+)', r)
+                if m != None:
+                    if len(v) == 2:
+                        users.insert(len(users), {
+                            'alliance': v[1],
+                            'user': v[0]
+                        })
+                    elif len(v) == 1:
+                        users.insert(len(users), {
+                            'alliance': None,
+                            'user': v[0]
+                        })
+                    elements = 0
+                    v = []
+                else :
+                    v.insert(0, r)
+            points = []
+            n = 0
+            for point in ranks2:
+                p = point.strip()
+                if p != '':
+                    if n == 1:
+                        points.insert(len(points), p)
+                        n = 0
+                    else :
+                        n = 1
+            # Merge tables
+            for u, p in zip(users, points):
+                p = re.sub('[.]','',p)
+                u['points'] = int(p)
+                u['scan_date'] = scanDate
+                u['type'] = name
+            ranking = ranking + users
+        return ranking
+
+
     def getMap(self, x, y):
         r = None
         try:
