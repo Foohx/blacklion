@@ -153,6 +153,16 @@ class ThirdWorldWar:
         })
         return True
 
+    def rChangeBase(self, bid):
+        bid = int(bid)
+        r = self.s.get('http://www.3gm.fr/game/index.php?chbs='+str(bid))
+
+    def getBases(self):
+        r = self.s.get('http://www.3gm.fr/game/index.php')
+        t = html.fromstring(r.content)
+        bases = t.xpath('//select[@class="select_ins"]/option/@value')
+        return bases
+
     def getRanking(self, name="global"):
         scanDate = int(time.time())
         ranking = []
@@ -208,7 +218,6 @@ class ThirdWorldWar:
                 u['type'] = name
             ranking = ranking + users
         return ranking
-
 
     def getMap(self, x, y):
         r = None
@@ -362,7 +371,6 @@ class ThirdWorldWar:
                     'cost': cost
                 })
         return technos
-
 
     def getTroops(self):
         r = self.s.get('http://www.3gm.fr/game/troops.php')
