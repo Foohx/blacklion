@@ -113,6 +113,17 @@ class ThirdWorldWar:
         r = self.s.get('http://www.3gm.fr/game/techno.php?a=lancer&tech=t_'+name.lower()+'&tk='+token)
         return True
 
+    def rArmyStart(self, name, quantity):
+        r = self.s.get('http://www.3gm.fr/game/troops.php')
+        r, token = self.getToken(r.content)
+        if not r:
+            return False
+        r = self.s.post('http://www.3gm.fr/game/troops.php?tk='+token, data={
+            'quantity': quantity,
+            'u': name
+        })
+        return True
+
     def rMission(self, x, y):
         r = self.s.get('http://www.3gm.fr/game/mission.php')
         r, token = self.getToken(r.content)
@@ -135,12 +146,12 @@ class ThirdWorldWar:
             return False
         r = self.s.post('http://www.3gm.fr/game/mission.php', data={
             'tk': token,
-            'q_alliage': 500000,
-            'q_silicium': 500000,
-            'q_petrole': 500000,
-            'q_essence': 500000,
+            'q_alliage': 1000000,
+            'q_silicium': 1000000,
+            'q_petrole': 0,
+            'q_essence': 0,
             'q_pieces': 0,
-            'q_monnaie': 500000,
+            'q_monnaie': 1000000,
             'x': x,
             'y': y,
             'mission': 'transport',
@@ -149,7 +160,7 @@ class ThirdWorldWar:
             'q_Wingfires': 0,
             'q_Croiseurs': 0,
             'send2': '',
-            'speed': 500
+            'speed': 100000
         })
         return True
 
@@ -382,7 +393,7 @@ class ThirdWorldWar:
             qty = re.sub('[.]', '', qty)
             troops.insert(-1, {
                 'name': name,
-                'qty': int(qty)
+                'level': int(qty)
             })
         return troops
 
@@ -397,7 +408,7 @@ class ThirdWorldWar:
             qty = re.sub('[.]', '', qty)
             troops.insert(-1, {
                 'name': name,
-                'qty': int(qty)
+                'level': int(qty)
             })
         return troops
 
