@@ -144,6 +144,7 @@ class Bot:
         b, index = self._isIn("Buildings", feeds, "name")
         if not b: return
         if int(feeds[index]['actives']) >= int(feeds[index]['max']):
+            self.log("!", "Buildings feed is full !", True)
             return
         actions = self._getGroupActionForLevel(self._actionLevel)
         if actions == None: return
@@ -157,7 +158,7 @@ class Bot:
                 isOk = self.account.rStartBuilding(builds[bIndex]["name"])
                 self.log(
                     '+' if isOk else '-',
-                    "Starting building \""+builds[bIndex]["name"]+"\" (lvl:"+str(action['level'])+")",
+                    "Starting building \""+builds[bIndex]["name"]+"\" (lvl:"+builds[bIndex]["level"]+"/"+str(action['level'])+")",
                     True
                 )
                 feeds[index]['actives'] = int(feeds[index]['actives']) +1 if isOk else int(feeds[index]['actives'])
