@@ -27,20 +27,20 @@ Soon..
 
 Tout d'abord, il faut installer `venv`, pour ce faire on utilise `pip` insatallé précédemment :
 
-```
+```sh
 pip install venv
 ```
 
 Maintenant, nous pouvons initialiser notre environnement virtuel en utilisant `Python 2.x` :
 
-```
+```sh
 virtualenv -p /usr/bin/python2.7 cache/env
 cd cache/env && source bin/activate && cd ../../
 ```
 
 Puis on installe les plugins nécéssaires au fonctionnement du bot :
 
-```
+```sh
 pip install -r cache/requirements.txt
 ```
 
@@ -52,13 +52,13 @@ Soon...
 
 Pour executer BlackLion, il vous suffit d'activer l'environnement virtuel dans votre session de terminal (si ce n'est pas déjà fait) :
 
-```
+```sh
 cd cache/env && source bin/activate && cd ../../
 ```
 
 Enfin, nous pouvons le lancer :
 
-```
+```sh
 python ./blacklion
 ```
 

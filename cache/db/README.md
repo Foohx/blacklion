@@ -6,7 +6,7 @@ Ici se trouvent tous les fichiers de configuraiton du bot. Ils sont tous au form
 
 Le fichier `accounts.json` contient la liste de tous vos comptes 3GM. Un compte est représenté par la structure suivante :
 
-```
+```json
 {
     "email": "email@example.com",
     "nickname": "username",
@@ -28,7 +28,7 @@ Si l'on souhaite ajouté un second compte dans le fichier `accounts.json`, on aj
 
 Exemple de fichier `accounts.json` :
 
-```
+```json
 {
     "users": [
         {
