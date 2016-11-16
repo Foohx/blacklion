@@ -143,7 +143,6 @@ class Bot:
         feeds = self.account.getFeeds()
         b, index = self._isIn("Buildings", feeds, "name")
         if not b: return
-        print("FEED: ", int(feeds[index]['actives']), int(feeds[index]['max']))
         if int(feeds[index]['actives']) >= int(feeds[index]['max']):
             self.log("!", "Buildings feed is full !", True)
             return
