@@ -38,6 +38,8 @@ class Bot:
             return False
         self.log('?', "Selecting \""+ self.CONST_SERVERS[self.account.account['serveur']] +"/"+ self.account.account['email'] +"\"", True)
         self.log('?', "Group \""+self._getGroupData(self._groupID)['name']+"\" [ID:"+str(self._groupID)+"] / Level "+str(self._actionLevel))
+        self.functions()
+        self.workers()
 
     def loadDatabases(self):
         self.db['groups'] = Database("cache/db/groups.json")
@@ -57,13 +59,14 @@ class Bot:
         try:
             group = self._getGroupData(self._groupID)
             if group != None and "functions" in group:
+                self.log('!', "Functions !", True)
                 for f in group['functions']:
-                    self.log("?", "Function "+f+" is define in groups..")
+                    self.log("?", "\tFunction "+f+" is define in groups..")
                     userFunc = getattr(self, f)
-                    self.log("!", "Calling "+f+"()...")
+                    self.log("!", "\tCalling "+f+"()...")
                     userFunc()
         except AttributeError:
-            self.log("-", "Function does not exist !", True)
+            self.log("-", "\tFunction does not exist !", True)
             pass
 
     def _fncChatBotAlly(self):
@@ -79,14 +82,14 @@ class Bot:
 
     def _fncChatBotAlly_cmdBase(self, m):
         if len(m) >= 2:
-            self.log("+", "Receive command !base")
+            self.log("+", "\t\tReceive command !base")
             pseudo = ""
             i = 1
             while i<len(m):
                 pseudo = pseudo + " " + m[i]
                 pseudo = pseudo.strip()
                 i = i +1
-            self.log("?", "Searching bases for user \"" + pseudo + "\"..")
+            self.log("?", "\t\tSearching bases for user \"" + pseudo + "\"..")
 
             table = self.db['maps'].table('server_'+str(self.account.account['serveur']))
             scan_date = table.get(where('id'), len(table))
@@ -106,7 +109,7 @@ class Bot:
             log("-", "Receive command !base, but no args..")
 
     def _fncChatBotAlly_cmdWhoPlays(self, m):
-        self.log("+", "Receive command !who_plays")
+        self.log("+", "\t\tReceive command !who_plays")
         table = self.db['ranks'].table('server_'+str(self.account.account['serveur']))
 
         # scan_date = table.get(where('id'), len(table))
@@ -114,7 +117,7 @@ class Bot:
 
         ranks_old = table.all()
         ranks_now = self.account.getRanking()
-        self.log("?", "Searching for actives users..")
+        self.log("?", "\t\tSearching for actives users..")
         rapport = "Active players for last 5 days :\n\n"
         count = 0
         for rn in ranks_now:
@@ -134,6 +137,7 @@ class Bot:
     def workers(self):
         if not self._isPauseFinished():
             return False
+        self.log('!', "Workers !", True)
         self._actionLevel = self._getGroupLevel()
         self._workersActionsForBuildings()
         self._workersActionsForTechnology()
@@ -144,7 +148,7 @@ class Bot:
         b, index = self._isIn("Buildings", feeds, "name")
         if not b: return
         if int(feeds[index]['actives']) >= int(feeds[index]['max']):
-            self.log("!", "Buildings feed is full !", True)
+            self.log("-", "\tBuildings feed is full !", True)
             return
         actions = self._getGroupActionForLevel(self._actionLevel)
         if actions == None: return
@@ -161,7 +165,7 @@ class Bot:
                 isOk = True if int(cFeeds[cIndex]['actives']) == int(feeds[index]['actives']) +1 else False
                 self.log(
                     '+' if isOk else '-',
-                    "Starting building \""+builds[bIndex]["name"]+"\" (lvl:"+builds[bIndex]["level"]+"/"+str(action['level'])+")",
+                    "\tStarting building \""+builds[bIndex]["name"]+"\" (lvl:"+builds[bIndex]["level"]+"/"+str(action['level'])+")",
                     True
                 )
                 feeds[index]['actives'] = int(feeds[index]['actives']) +1 if isOk else int(feeds[index]['actives'])
@@ -180,13 +184,13 @@ class Bot:
             if int(builds[bIndex]['level']) < int(action['level']):
                 if builds[bIndex]['activable']:
                     isOk = self.account.rTechActivate(action['entity'])
-                    self.log('+' if isOk else "-", "Tech \""+action['entity']+"\" activated!", True)
+                    self.log('+' if isOk else "-", "\tTech \""+action['entity']+"\" activated!", True)
                 elif builds[bIndex]['available'] == True and not builds[bIndex]['feed']:
                     isOk = self.account.rTechStart(action['entity'])
                     checkBuilds = self.account.getTechnology()
                     cb, cbIndex = self._isIn(action['entity'], checkBuilds, "name")
                     if cb:
-                        self.log('+' if isOk and checkBuilds[cbIndex]['feed'] else '-', "Starting technology \""+action['entity']+"\"", True)
+                        self.log('+' if isOk and checkBuilds[cbIndex]['feed'] else '-', "\tStarting technology \""+action['entity']+"\"", True)
 
     def _workersActionsForTroops(self):
         n =0

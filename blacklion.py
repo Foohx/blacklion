@@ -30,8 +30,7 @@ try:
     while 1:
         for bot in bots:
             bot.hello()
-            bot.functions()
-            bot.workers()
+            
             bot.setPause()
         print("Pause..")
         for i in range(0,60):
@@ -42,6 +41,7 @@ except KeyboardInterrupt:
     while len(bots):
         del bots[0]
     sys.exit(0)
+
 
 
                 # Manage Army
@@ -55,13 +55,6 @@ except KeyboardInterrupt:
     #                             log('+', "Building x"+str(action['level'])+" \""+str(action['entity'])+"\"", True)
     #                         else :
     #                             log('-', "Building x"+str(action['level'])+" \""+str(action['entity'])+"\"", True)
-    #
-    #
-    # pause = random.randint(1,10)
-    # log("?", "Waiting for "+str(pause)+" minutes..", True)
-    # for it in range(0, pause):
-    #     log("?", str(pause-it)+" minutes remains !", False)
-    #     time.sleep(60)
     #
 
 #
