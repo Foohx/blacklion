@@ -17,8 +17,54 @@ BlackLion est un bot pour le jeu en ligne [3GM](http://www.3gm.fr/) (3ème Guerr
 
 ---
 
+# Installation
 
-## Ressources
+## Ubuntu / Debian / Windows 10 (Linux EXT)
+
+Soon..
+
+## Environnement Virtuel
+
+Tout d'abord, il faut installer `venv`, pour ce faire on utilise `pip` insatallé précédemment :
+
+```
+pip install venv
+```
+
+Maintenant, nous pouvons initialiser notre environnement virtuel en utilisant `Python 2.x` :
+
+```
+virtualenv -p /usr/bin/python2.7 cache/env
+cd cache/env && source bin/activate && cd ../../
+```
+
+Puis on installe les plugins nécéssaires au fonctionnement du bot :
+
+```
+pip install -r cache/requirements.txt
+```
+
+# Configuration
+
+Soon...
+
+# Execution
+
+Pour executer BlackLion, il vous suffit d'activer l'environnement virtuel dans votre session de terminal (si ce n'est pas déjà fait) :
+
+```
+cd cache/env && source bin/activate && cd ../../
+```
+
+Enfin, nous pouvons le lancer :
+
+```
+python ./blacklion
+```
+
+`Ctrl+C` pour arrêter le bot et déconnecter tous les comptes.
+
+# Ressources
 
 http://requests-fr.readthedocs.io/en/latest/index.html
 https://docs.python.org/2/library/re.html
