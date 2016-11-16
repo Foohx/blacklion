@@ -157,6 +157,9 @@ class Bot:
                 continue
             if builds[bIndex]['available'] == True and int(action['level']) > int(builds[bIndex]['level']):
                 isOk = self.account.rStartBuilding(builds[bIndex]["name"])
+                cFeeds = self.account.getFeeds()
+                cb, cIndex = self._isIn("Buildings", cFeeds, "name")
+                isOk = True if int(cFeeds[cIndex]['actives']) == int(feeds[index]['actives']) +1 else False
                 self.log(
                     '+' if isOk else '-',
                     "Starting building \""+builds[bIndex]["name"]+"\" (lvl:"+builds[bIndex]["level"]+"/"+str(action['level'])+")",
