@@ -19,11 +19,11 @@ BlackLion est un bot pour le jeu en ligne [3GM](http://www.3gm.fr/) (3ème Guerr
 
 # Installation
 
-## Ubuntu / Debian / Windows 10 (Linux EXT)
+### Ubuntu / Debian / Windows 10 (Linux EXT)
 
 Soon..
 
-## Environnement Virtuel
+### Environnement Virtuel
 
 Tout d'abord, il faut installer `venv`, pour ce faire on utilise `pip` insatallé précédemment :
 
