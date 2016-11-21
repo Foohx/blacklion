@@ -1,11 +1,16 @@
 {
     "groups": [
         {
-            "id": 2,
-            "name": "AutoEXP",
+            "id": 3,
+            "name": "AutoEXP & Func",
             "functions": [
                 "_fncChatBotAlly"
             ],
+            "actions_from": 2
+        },
+        {
+            "id": 2,
+            "name": "AutoEXP",
             "actions":[
                 {"id": 0,"entity": "Parlement","level": 20},
                 {"id": 0,"entity": "Service interne","level": 100},
