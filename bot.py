@@ -48,7 +48,7 @@ class Bot:
 
     def setPause(self):
         if time.time() >= self._pauseTimestamp:
-            self._pauseTimestamp = time.time() + (random.randint(1,30)*60)
+            self._pauseTimestamp = time.time() + (random.randint(random.randint(0,10), random.randint(30,50))*60)
 
     def _isPauseFinished(self):
         return True if time.time() >= self._pauseTimestamp else False
